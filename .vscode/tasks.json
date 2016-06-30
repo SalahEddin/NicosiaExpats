@@ -1,0 +1,12 @@
+{
+    "version": "0.1.0",
+    "command": "/Library/Frameworks/Python.framework/Versions/2.7/bin/python",
+    "args": ["script.py"],
+    "problemMatcher": {
+        "fileLocation": ["relative", "${workspaceRoot}"],
+        "pattern": {
+            "regexp": "^(.*)+s$",
+            "message": 1
+        }
+    }
+}
