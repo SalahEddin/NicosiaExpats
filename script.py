@@ -51,6 +51,7 @@ with open('musiccy.csv', 'rb') as csvfile:
         tmp_event = event(row['Event name/link'], date_object, row['Place'], moreURL = row['Event name/link_link']) 
         allevents.append(tmp_event)
 
+#wherevent
 with open('wherevent.csv', 'rb') as csvfile:
     reader = csv.DictReader(csvfile)
     # list of events
@@ -66,6 +67,36 @@ for i in allevents:
     print i.m_title
     print i.m_time
     print '==============='
+
+# <h3>Monday 2nd June</h3>
+                                
+#                                 <h6>Starts at: 12:00 <b>Cycling</b></h6>
+#                                 <p><i> Event Title Goes here.</i> </p>
+#                                 <p><b>Location</b goes here</p>
+#                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto reiciendis eos magni
+#                                   deleniti accusamus tempore, consectetur! Maxime amet, exercitationem nihil fugit eius esse
+#                                   voluptatum ab incidunt minima, saepe reiciendis ipsum.</p>
+#                                 <p><small>More: <a href="#">Link</a></small></p>
+
+with open("pre.html") as f:
+    with open("auto.html", "w") as f1:
+        for line in f:
+            f1.write(line) 
+
+with open("auto.html", "a") as f1:
+    for idx, i in enumerate(allevents):
+        if(idx == 0 or allevents[idx-1].m_time.month != i.m_time.month):
+            f1.write('<hr/>\n')
+            f1.write('<h4>' + i.m_time.strftime("%A %b-%d at: %H:%M") + ' <b><small>' + i.m_genre + '</small></b></h4>\n')
+        f1.write('<p><i>' + i.m_title + '</i></p>\n')
+        f1.write('<p><b>Location </b>' + i.m_place + '</p>\n')
+        f1.write('<p>' + i.m_description + '</p>\n')
+        f1.write('<p><small>More: <a href="' + i.m_detailsUrl + '">Link</a></small></p>\n')
+
+with open("post.html") as f:
+    with open("auto.html", "a") as f1:
+        for line in f:
+            f1.write(line) 
 
 print "This line will be printed."
 
