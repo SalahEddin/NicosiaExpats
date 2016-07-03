@@ -36,10 +36,25 @@ with open('cyprusevents.csv', 'rb') as csvfile:
         allevents.append(tmp_event)
 
 # 
+with open('musiccy.csv', 'rb') as csvfile:
+    reader = csv.DictReader(csvfile)
+    # list of events
+    for row in reader:
+        date_con = row['Month'] + ' ' + row['Day']
+        date_object = datetime.datetime.strptime(date_con, '%b %d')
+        date_object = date_object.replace(year=datetime.datetime.now().year)
+        if row['Time'] != "":
+            time_substring = row['Time'].split(' ', 1)[0] + " " + row['Time'].split(' ', 1)[1][0] + "M"
+            parsed_time =  datetime.datetime.strptime(time_substring , '%I:%M %p')
+            date_object = date_object.replace(hour=parsed_time.hour)
+            date_object = date_object.replace(minute=parsed_time.minute)
+        tmp_event = event(row['Event name/link'], date_object, row['Place'], moreURL = row['Event name/link_link']) 
+        allevents.append(tmp_event)
 
 #  Sort all events by date
 allevents = sorted(allevents, key=lambda event: event.m_time)
 for i in allevents:
+    print i.m_title
     print i.m_time
     print '==============='
 
