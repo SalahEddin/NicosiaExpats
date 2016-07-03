@@ -35,7 +35,7 @@ with open('cyprusevents.csv', 'rb') as csvfile:
         tmp_event = event(row['Summary link'], date_object, row['Where value'], img = row['Image'], genre = row['Descriptionblock value'],moreURL = row['Summary link_link']) 
         allevents.append(tmp_event)
 
-# 
+# MuicCy FB group
 with open('musiccy.csv', 'rb') as csvfile:
     reader = csv.DictReader(csvfile)
     # list of events
@@ -49,6 +49,15 @@ with open('musiccy.csv', 'rb') as csvfile:
             date_object = date_object.replace(hour=parsed_time.hour)
             date_object = date_object.replace(minute=parsed_time.minute)
         tmp_event = event(row['Event name/link'], date_object, row['Place'], moreURL = row['Event name/link_link']) 
+        allevents.append(tmp_event)
+
+with open('wherevent.csv', 'rb') as csvfile:
+    reader = csv.DictReader(csvfile)
+    # list of events
+    for row in reader:
+        date_object = datetime.datetime.strptime(row['Time'], '%H:%M')
+        date_object = date_object.replace(year=datetime.datetime.now().year)
+        tmp_event = event(row['Title/link'], date_object, row['Place'], img = row['Image'], moreURL = row['Title/link_link']) 
         allevents.append(tmp_event)
 
 #  Sort all events by date
