@@ -87,8 +87,8 @@ with open("auto.html", "a") as f1:
     for idx, i in enumerate(allevents):
         if(idx == 0 or allevents[idx-1].m_time.month != i.m_time.month):
             f1.write('<hr/>\n')
-            f1.write('<h4>' + i.m_time.strftime("%A %b-%d at: %H:%M") + ' <b><small>' + i.m_genre + '</small></b></h4>\n')
-        f1.write('<p><i>' + i.m_title + '</i></p>\n')
+            f1.write('<h4>' + i.m_time.strftime("%A %b-%d at: %H:%M") + '</b></h4>\n')
+        f1.write('<p><b>' + i.m_title + ' <small>-' + i.m_genre + '</small></b></p>\n')
         f1.write('<p><b>Location </b>' + i.m_place + '</p>\n')
         f1.write('<p>' + i.m_description + '</p>\n')
         f1.write('<p><small>More: <a href="' + i.m_detailsUrl + '">Link</a></small></p>\n')
